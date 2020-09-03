@@ -5,6 +5,7 @@
 __pycache__
 db.sqlite3
 media
+app/app/secrets.py
 
 # Backup files # 
 *.bak 
