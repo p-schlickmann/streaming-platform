@@ -1,1 +1,1 @@
-# Streaming platform built using React
+# Streaming platform built using React-Django Integration
