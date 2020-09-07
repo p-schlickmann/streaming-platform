@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom'
 
 
 const Header = ({location}) => {
-    if (location.pathname.match('/login')) return null
+    if (location.pathname.match('/login') || location.pathname.match('/signup')) return null
     return (
         <div className="ui secondary pointing menu">
             <Link to="/" className="item"><h1>Streamy</h1></Link>

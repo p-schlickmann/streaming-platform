@@ -1,10 +1,12 @@
 import streams from '../api/streams'
 
 
-export const signIn = (userId) => {
+export const signIn = (formValues) => async dispatch => {
+    const response = await streams.post('token/', formValues)
+    console.log(response)
     return {
         type: 'SIGN_IN',
-        payload: userId
+        payload: response.data
     }
 } 
 
@@ -12,6 +14,12 @@ export const signOut = () => {
     return {
         type: 'SIGN_OUT'
     }
+}
+
+export const signUp = (formValues) => async dispatch => {
+    const response = await streams.post('create/', formValues)
+
+    dispatch({type: 'SIGN_UP', payload: response.data})
 }
 
 export const getStreams = () => async dispatch => {
@@ -23,7 +31,7 @@ export const getStreams = () => async dispatch => {
 }
 
 export const createStream = formValues => async dispatch => {
-     const response = await streams.post('/newstream', formValues)
+     const response = await streams.post('newstream/', formValues)
      
 }
 

@@ -5,6 +5,7 @@ import authReducer from './authReducer'
 import streamsReducer from './streamsReducer'
 import categoriesReducer from './categoriesReducer'
 
+
 export default combineReducers({
     auth: authReducer,
     form: reducer,

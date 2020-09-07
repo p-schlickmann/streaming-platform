@@ -1,11 +1,12 @@
 import React from 'react'
 import {Field, reduxForm} from 'redux-form'
 import {connect} from 'react-redux'
+
 import {createStream} from '../../actions/actions'
-import { createStore } from 'redux'
 
 
 const StreamCreate = (props) => {
+
     const renderInput = formProps => {
         const hasError = formProps.meta.error && formProps.meta.touched ? true : false
         return (
@@ -22,6 +23,7 @@ const StreamCreate = (props) => {
     }
 
     const onSubmit = (formValues) => {
+        console.log(formValues)
         props.createStream(formValues)
     }
 
@@ -36,7 +38,6 @@ const StreamCreate = (props) => {
 
 const validate = (formValues) => {
     const errors = {}
-
     if (!formValues.title) {
         errors.title = 'You must enter a title'
     } if (!formValues.description) {
@@ -46,7 +47,7 @@ const validate = (formValues) => {
     return errors
 }
 
-export default connect(null, createStream)(
+export default connect(null, {createStream})(
     reduxForm({
         form: 'streamCreate',
         validate: validate
