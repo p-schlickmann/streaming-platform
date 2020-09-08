@@ -65,9 +65,11 @@ class AuthTokenSerializer(serializers.Serializer):
 
 
 class StreamSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Stream
-        fields = ('user', 'category', 'title')
+        fields = ('user', 'category', 'title', 'id')
+        read_only_fields = ('user',)
 
 
 class CategorySerializer:

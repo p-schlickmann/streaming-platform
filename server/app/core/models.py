@@ -10,8 +10,8 @@ class Category(models.Model):
 
 
 class Stream(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, unique=False, related_name='streams')
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, related_name='categories', null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, related_name='streams', null=True)
     title = models.CharField(max_length=128)
 
     def __str__(self):
