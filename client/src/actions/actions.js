@@ -1,3 +1,6 @@
+import streams from '../api/streams'
+
+
 export const signIn = (userId) => {
     return {
         type: 'SIGN_IN',
@@ -10,3 +13,25 @@ export const signOut = () => {
         type: 'SIGN_OUT'
     }
 }
+
+export const getStreams = () => async dispatch => {
+    const response = await streams.get('streams/')
+    dispatch({
+        type: 'GET_STREAMS',
+        payload: response.data
+    })
+}
+
+export const createStream = formValues => async dispatch => {
+     const response = await streams.post('/newstream', formValues)
+     
+}
+
+export const getCategories = () => async dispatch => {
+    const response = await streams.get('categories/')
+    console.log(response)
+    dispatch({
+        type: 'GET_CATEGORIES',
+        payload: response.data
+    })
+} 

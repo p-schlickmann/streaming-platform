@@ -31,7 +31,7 @@ class ManageUserView(generics.RetrieveUpdateAPIView):
 
 class StreamList(generics.ListAPIView):
     serializer_class = StreamSerializer
-    http_method_names = ("get",)
+    http_method_names = ("get", "options")
     queryset = Stream.objects.all()
 
     def get_queryset(self):
@@ -80,7 +80,6 @@ class CategoriesView(generics.ListAPIView):
     def get_queryset(self):
         name = self.request.query_params.get('name')
         category_id = self.request.query_params.get('id')
-        print(name, category_id)
         if name:
             queryset = self.queryset.filter(name=name)
         elif category_id:
