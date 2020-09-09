@@ -65,12 +65,16 @@ class AuthTokenSerializer(serializers.Serializer):
 
 
 class StreamSerializer(serializers.ModelSerializer):
+    username = serializers.ReadOnlyField(source="user.username")
+    category_name = serializers.ReadOnlyField(source='category.name')
 
     class Meta:
         model = Stream
-        fields = ('user', 'category', 'title', 'id')
-        read_only_fields = ('user',)
+        fields = ('user', 'username', 'category', 'category_name', 'title', 'id')
+        read_only_fields = ('user', 'username', 'category_name')
 
 
-class CategorySerializer:
-    pass
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ('name', 'id')

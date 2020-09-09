@@ -1,10 +1,11 @@
 from rest_framework import generics, authentication, permissions
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
-from rest_framework import filters
+from rest_framework.response import Response
+from django.db.utils import IntegrityError
 
-from .serializers import UserSerializer, AuthTokenSerializer, StreamSerializer
-from core.models import Stream
+from .serializers import UserSerializer, AuthTokenSerializer, StreamSerializer, CategorySerializer
+from core.models import Stream, Category
 
 
 class CreateUserView(generics.CreateAPIView):
@@ -30,40 +31,61 @@ class ManageUserView(generics.RetrieveUpdateAPIView):
 
 class StreamList(generics.ListAPIView):
     serializer_class = StreamSerializer
-    filter_backends = (filters.SearchFilter,)
     http_method_names = ("get",)
-
-    def _params_to_ints(self, qs):
-        """Convert a list of string IDs to a list of integers"""
-        return [int(str_id) for str_id in qs.split(',')]
+    queryset = Stream.objects.all()
 
     def get_queryset(self):
-        """Retrieve the recipes for the authenticated user"""
-        stream_ids = self.request.query_params.get('stream')
-        users_ids = self.request.query_params.get('user')
-        categories_ids = self.request.query_params.get('category')
-        queryset = self.queryset
-        if users_ids:
-            _ = self._params_to_ints(users_ids)
-            queryset = queryset.filter(tags__id__in=_)
-        if categories_ids:
-            _ = self._params_to_ints(categories_ids)
-            queryset = queryset.filter(ingredients__id__in=_)
-        if stream_ids:
-            _ = self._params_to_ints(stream_ids)
-            queryset = queryset.filter(ingredients__id__in=_)
+        stream = self.request.query_params.get('stream')
+        category = self.request.query_params.get('category')
+        user = self.request.query_params.get('user')
+
+        if stream:
+            queryset = self.queryset.filter(id=stream)
+        elif category:
+            queryset = self.queryset.filter(category=category)
+        elif user:
+            queryset = self.queryset.filter(user=user)
+        else:
+            queryset = self.queryset.all()
+
+        return queryset
 
 
+class CreateStreamView(generics.CreateAPIView):
+    serializer_class = StreamSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
-class ManageStreamView(generics.RetrieveUpdateAPIView):
+class ManageStreamView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     authentication_classes = (authentication.TokenAuthentication,)
     serializer_class = StreamSerializer
 
     def get_object(self):
-        user_stream = Stream.objects.filter(user=self.request.user)[0]
+        try:
+            user_stream = Stream.objects.filter(user=self.request.user)[0]
+        except IndexError:
+            user_stream = None
 
         return user_stream
 
 
+class CategoriesView(generics.ListAPIView):
+    serializer_class = CategorySerializer
+    queryset = Category.objects.all()
+    http_method_names = ('get',)
+
+    def get_queryset(self):
+        name = self.request.query_params.get('name')
+        category_id = self.request.query_params.get('id')
+        print(name, category_id)
+        if name:
+            queryset = self.queryset.filter(name=name)
+        elif category_id:
+            queryset = self.queryset.filter(id=category_id)
+        else:
+            queryset = self.queryset.all()
+
+        return queryset

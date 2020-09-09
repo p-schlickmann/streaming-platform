@@ -9,4 +9,6 @@ urlpatterns = [
     path('me/', views.ManageUserView.as_view(), name="me"),
     path('streams/', views.StreamList.as_view(), name='streams'),
     path('mystream/', views.ManageStreamView.as_view(), name='mystream'),
+    path('newstream/', views.CreateStreamView.as_view(), name='newstream'),
+    path('categories/', views.CategoriesView.as_view(), name='categories')
 ]
