@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect } from 'react'
 import { BrowserRouter, Route} from 'react-router-dom'
 
 import Header from './Header'
@@ -8,6 +8,7 @@ import StreamEdit from './streams/StreamEdit'
 import StreamList from './streams/StreamList'
 import StreamShow from './streams/StreamShow'
 import Categories from './streams/Categories'
+import Auth from './Auth'
 
 export default () => {
     return (
@@ -16,6 +17,7 @@ export default () => {
                 <div>
                     <Header />
                     <Route path="/categories" exact component={Categories}/>
+                    <Route path="/login" exact component={Auth} />
                     <Route path="/" exact component={StreamList}/>
                     <Route path="/streams/new" exact component={StreamCreate}/>
                     <Route path="/streams/edit" exact component={StreamEdit}/>

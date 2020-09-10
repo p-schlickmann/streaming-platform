@@ -9,20 +9,18 @@ const StreamList = ({getStreams, streams}) => {
     }, [])
 
     const renderStreams = () => {
-        return streams? streams.map(stream => {
-            if (!stream.category_name) {
-                stream.category_name = 'All around'
-            }
+        return streams.map(stream => {
+            if (!stream.title) return null
             return(
                 <div className="item" key={stream.id}>
-                    <i className="large middle aligned icon camera" />
+                    <i className="big middle aligned icon camera" />
                     <div className="content" >
-                    {stream.title}
-                    <div className="description">{stream.username} | {stream.category_name}</div>
+                        <strong style={{fontSize: '20px'}}>{stream.title}</strong>
+                    <div className="description"><strong style={{fontSize: '15px'}}>{stream.username} </strong>{stream.category_name ?  `is streaming ${stream.category_name}` : 'is Live'}</div>
                     </div>
                 </div>
             )
-        }) : null
+        })
     }
 
     return (

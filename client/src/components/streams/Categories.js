@@ -6,15 +6,14 @@ import {getCategories} from '../../actions/actions'
 const Categories = ({getCategories, categories}) => {
 
     useEffect(() => {
-       console.log(categories)
        getCategories() 
     },[])
 
     const renderCategories = () => {
         return categories.map(category => {
             return (
-                <div key={category.id} class="item">
-                    <div className="content">
+                <div key={category.id} className="medium item">
+                    <div onClick={() => '' } className="content" style={{fontSize:'20px', cursor: "pointer"}}>
                         {category.name}
                     </div>
                 </div>
@@ -24,7 +23,7 @@ const Categories = ({getCategories, categories}) => {
 
     return (
         <div>
-            <h3>Categories</h3>
+            <h2>Categories</h2>
             <div className="ui celled list">
                 {renderCategories()}
             </div>

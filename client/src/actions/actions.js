@@ -29,7 +29,6 @@ export const createStream = formValues => async dispatch => {
 
 export const getCategories = () => async dispatch => {
     const response = await streams.get('categories/')
-    console.log(response)
     dispatch({
         type: 'GET_CATEGORIES',
         payload: response.data
