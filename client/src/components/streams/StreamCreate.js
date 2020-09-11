@@ -8,6 +8,7 @@ import {createStream} from '../../actions/actions'
 const StreamCreate = (props) => {
 
     const renderInput = formProps => {
+        console.log(formProps)
         const hasError = formProps.meta.error && formProps.meta.touched ? true : false
         return (
             <div className={`field ${hasError ? 'error' : ''}`}>
