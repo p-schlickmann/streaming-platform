@@ -5,9 +5,8 @@ import {Field, reduxForm} from 'redux-form'
 import {signIn} from '../actions/actions'
 
 const AuthForm = (props) => {
-
     const renderInput = (formProps) => {
-        const hasError = formProps.meta.error && formProps.meta.touched ? true : false
+        const hasError = formProps.meta.error && formProps.meta.touched
         return (
             <div className={`field ${hasError ? 'error' : ''}`}>
                 <div className="ui left icon input">
@@ -22,11 +21,11 @@ const AuthForm = (props) => {
     } 
 
     const onSubmit = (formValues) => {
-        console.log(formValues)
+        props.signIn(formValues)
     }
     return (
         <form className="ui large form error" onSubmit={props.handleSubmit(onSubmit)}>
-            <Field type='text' icon='user' name='username' placeholder='Username or E-mail' component={renderInput}/>
+            <Field type='text' icon='user' name='email_or_username' placeholder='Username or E-mail' component={renderInput}/>
             <Field type='password' icon='lock' name='password' placeholder='Password' component={renderInput}/>
             <button className="ui fluid large button primary">Login</button>
         </form>

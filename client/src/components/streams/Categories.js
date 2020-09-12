@@ -32,7 +32,6 @@ const Categories = ({getCategories, categories}) => {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {categories: state.categories}
 }
 

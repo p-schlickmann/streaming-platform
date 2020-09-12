@@ -4,10 +4,12 @@ import streams from '../api/streams'
 export const signIn = (formValues) => async dispatch => {
     const response = await streams.post('token/', formValues)
     console.log(response)
-    return {
-        type: 'SIGN_IN',
-        payload: response.data
-    }
+    dispatch(
+        {
+            type: 'SIGN_IN',
+            payload: response.data
+        }
+    ) 
 } 
 
 export const signOut = () => {

@@ -1,12 +1,15 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
+import {connect} from 'react-redux'
 
 import AuthForm from './AuthForm'
 
 
-const Auth = () => {
+const Auth = ({authStatus}) => {
     return (
-        <div style={{height: '100vh', display:'flex', alignItems: 'center', justifyContent: 'center',}}>
+        authStatus.isSignedIn 
+        ? <Redirect to='/' />
+        :<div style={{height: '100vh', display:'flex', alignItems: 'center', justifyContent: 'center',}}>
             <div className="ui middle aligned center aligned grid" style={{width: '550px'}}>
             <div className="column">
                 <h2 className="ui black image header">
@@ -24,9 +27,12 @@ const Auth = () => {
                 </div>
             </div>
             </div>
-        </div>
-            
+        </div>     
     )
 }
 
-export default Auth
+const mapStateToProps = state => {
+    return {authStatus: state.auth}
+}
+
+export default connect(mapStateToProps)(Auth)
