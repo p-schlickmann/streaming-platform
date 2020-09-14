@@ -8,10 +8,7 @@ const Auth = ({authStatus}) => {
 
     if (authStatus.token) {
         document.cookie = `token=${authStatus.token}`
-    } else {
-        document.cookie = "token=0"
-    }
-
+    } 
     return (
         authStatus.token 
         ? <Redirect to='/' />
