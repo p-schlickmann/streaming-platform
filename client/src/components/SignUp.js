@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import {Redirect} from 'react-router-dom'
 
-import Auth from './Auth'
 import streams from '../api/streams'
 
 const SignUp = () => {

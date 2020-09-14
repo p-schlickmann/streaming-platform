@@ -34,8 +34,8 @@ const StreamList = ({getStreams, streams}) => {
     )
 }
 
-const mapStateToProps = (state) => {
-    return {streams: state.streams}
+const mapStateToProps = (state, ownProps) => {
+    return {streams: state.streams, cookies: ownProps.cookies}
 }
 
 export default connect(mapStateToProps, {getStreams})(StreamList)

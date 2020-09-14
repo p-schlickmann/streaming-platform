@@ -4,10 +4,16 @@ import {connect} from 'react-redux'
 
 import AuthForm from './AuthForm'
 
-
 const Auth = ({authStatus}) => {
+
+    if (authStatus.token) {
+        document.cookie = `token=${authStatus.token}`
+    } else {
+        document.cookie = "token=0"
+    }
+
     return (
-        authStatus.isSignedIn 
+        authStatus.token 
         ? <Redirect to='/' />
         :<div style={{height: '100vh', display:'flex', alignItems: 'center', justifyContent: 'center',}}>
             <div className="ui middle aligned center aligned grid" style={{width: '550px'}}>

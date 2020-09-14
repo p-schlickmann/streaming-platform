@@ -19,11 +19,11 @@ export default () => {
             <BrowserRouter >
                 <div>
                     <Header />
-                    <Route path="/categories" exact component={Categories}/>
+                    <Route path="/" exact component={StreamList}/>
                     <Route path="/login" exact component={Auth} />
                     <Route path='/signup' exact component={SignUp}/>
                     <Route path='/profile' exact component={Profile} />
-                    <Route path="/" exact component={StreamList}/>
+                    <Route path="/categories" exact component={Categories}/>
                     <Route path="/streams/new" exact component={StreamCreate}/>
                     <Route path="/streams/edit" exact component={StreamEdit}/>
                     <Route path="/streams/delete" exact component={StreamDelete}/>
