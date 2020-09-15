@@ -3,12 +3,15 @@ import {Link, Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 
 import AuthForm from './AuthForm'
+import deleteCookie from './../utils/deleteCookie'
 
 const Auth = ({authStatus}) => {
 
     if (authStatus.token) {
         document.cookie = `token=${authStatus.token}`
-    } 
+    } else {
+        deleteCookie('token')
+    }
     return (
         authStatus.token 
         ? <Redirect to='/' />
