@@ -4,10 +4,10 @@ import {connect} from 'react-redux'
 
 import getCookie from './../utils/getCookie'
 
-const Header = ({location, auth_status}) => {
+const Header = ({location}) => {
+    
     const token = getCookie('token')
-    console.log(token)
-    if (location.pathname.match('/login') || location.pathname.match('/signup')|| location.pathname.match('/profile') )  return null
+    if (location.pathname.match('/login') || location.pathname.match('/signup') || location.pathname.match('/profile') )  return null
     return (
         <div className="ui secondary pointing menu">
             <Link to="/" className="item"><h1>Streamy</h1></Link>
@@ -25,8 +25,6 @@ const Header = ({location, auth_status}) => {
     )
 }
 
-const mapStateToProps = state => {
-    return {auth_status: state.auth}
-}
 
-export default connect(mapStateToProps)(withRouter(Header))
+
+export default connect()(withRouter(Header))

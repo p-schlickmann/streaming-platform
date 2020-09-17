@@ -1,8 +1,7 @@
 from rest_framework import generics, authentication, permissions
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
-from rest_framework.response import Response
-from django.db.utils import IntegrityError
+from django.contrib.auth.models import User
 
 from .serializers import UserSerializer, AuthTokenSerializer, StreamSerializer, CategorySerializer
 from core.models import Stream, Category
@@ -37,14 +36,19 @@ class StreamList(generics.ListAPIView):
     def get_queryset(self):
         stream = self.request.query_params.get('stream')
         category = self.request.query_params.get('category')
+        url_user_id = self.request.query_params.get('userId')
         user = self.request.query_params.get('user')
 
         if stream:
             queryset = self.queryset.filter(id=stream)
         elif category:
-            queryset = self.queryset.filter(category=category)
+            category_id = Category.objects.get(name=category)
+            queryset = self.queryset.filter(category=category_id)
+        elif url_user_id:
+            queryset = self.queryset.filter(user=url_user_id)
         elif user:
-            queryset = self.queryset.filter(user=user)
+            user_id = User.objects.get(username=user)
+            queryset = self.queryset.filter(user=user_id)
         else:
             queryset = self.queryset.all()
 

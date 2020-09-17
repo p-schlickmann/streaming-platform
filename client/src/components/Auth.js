@@ -6,7 +6,6 @@ import AuthForm from './AuthForm'
 import deleteCookie from './../utils/deleteCookie'
 
 const Auth = ({authStatus}) => {
-
     if (authStatus.token) {
         document.cookie = `token=${authStatus.token}`
     } else {
