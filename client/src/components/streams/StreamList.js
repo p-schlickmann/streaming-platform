@@ -1,5 +1,6 @@
 import React, { useEffect} from 'react'
 import {connect} from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
 import {getStreams} from '../../actions/actions'
 
@@ -10,6 +11,12 @@ const StreamList = ({getStreams, streams, match}) => {
     }, [])
 
     const renderStreams = () => {
+        console.log(streams)
+        if (!streams) {
+            return (
+            <Redirect to="/streams"/>
+            )
+        }
         return streams.map(stream => {
             if (!stream.title) return null
             return(

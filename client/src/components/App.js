@@ -20,7 +20,7 @@ export default () => {
                 <div>
                     <Header />
                     <Route path="/" exact component={StreamList}/>
-                    <Route path="/login" exact component={Auth} />
+                    <Route path="/login" exact render={(props) => <Auth {...props}/>} />
                     <Route path='/signup' exact component={SignUp}/>
                     <Route path='/profile' exact component={Profile} />
                     <Route path="/categories" exact component={Categories}/>

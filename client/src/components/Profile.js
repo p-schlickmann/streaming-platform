@@ -8,9 +8,9 @@ import getCookie from './../utils/getCookie'
 
 const Profile = props => {
     const [gotLoggedOut, setLogoutStatus] = useState(false)
-
     const onButtonClick = () => {
         deleteCookie('token')
+        console.log('dele')
         props.signOut()
         setLogoutStatus(true)
     }
@@ -46,7 +46,7 @@ const Profile = props => {
                         </div>
                         <br />
                         <div  style={{display:'flex', alignItems:'center'}} >   
-                            <button className="ui fluid large button" onClick={onButtonClick}>Edit Profile</button>
+                            <button className="ui fluid large button" onClick={() => ''}>Edit Profile</button>
                             <button  className="ui fluid large button primary" onClick={onButtonClick}>Log out</button>
                         </div>  
                     </div>

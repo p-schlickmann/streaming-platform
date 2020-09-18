@@ -57,6 +57,8 @@ class StreamList(generics.ListAPIView):
 
 class CreateStreamView(generics.CreateAPIView):
     serializer_class = StreamSerializer
+    authentication_classes = (authentication.TokenAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
