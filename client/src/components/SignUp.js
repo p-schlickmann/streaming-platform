@@ -17,6 +17,7 @@ const SignUp = () => {
         })
         .catch(err => {
             if (err.response) {
+                console.log(err.response)
                 const error = err.response.data
                 if (error.email) {
                     setError(error.email[0])
@@ -53,7 +54,6 @@ const SignUp = () => {
     return (
         wasCreated
         ?<Redirect to="login"/>
-        
         :<div>
             <br/>
                 <h1 style={{textAlign: 'center'}}>Create Account</h1>

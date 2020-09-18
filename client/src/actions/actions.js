@@ -65,18 +65,6 @@ export const getStreams = (category) => async dispatch => {
     })
 }
 
-export const createStream = formValues => async dispatch => {
-     const response = await streams.post('newstream/', formValues, {
-         headers: {
-             Authorization: `Token ${formValues.token}`
-         }
-     })
-     console.log(response)
-     dispatch({
-        type: 'CREATE_STREAM'
-    })
-}
-
 export const getCategories = () => async dispatch => {
     const response = await streams.get('categories/')
     dispatch({

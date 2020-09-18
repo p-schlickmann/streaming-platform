@@ -1,7 +1,10 @@
 from rest_framework import generics, authentication, permissions
 from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.response import Response
 from rest_framework.settings import api_settings
 from django.contrib.auth.models import User
+from django.db.utils import IntegrityError
+from rest_framework.exceptions import ValidationError
 
 from .serializers import UserSerializer, AuthTokenSerializer, StreamSerializer, CategorySerializer
 from core.models import Stream, Category
@@ -61,7 +64,10 @@ class CreateStreamView(generics.CreateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        try:
+            serializer.save(user=self.request.user)
+        except IntegrityError:
+            raise ValidationError('You already have a Stream')
 
 
 class ManageStreamView(generics.RetrieveUpdateDestroyAPIView):

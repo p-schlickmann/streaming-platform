@@ -7,11 +7,10 @@ import {signOut, signInWithToken} from './../actions/actions'
 
 const Profile = props => {
     const [gotLoggedOut, setLogoutStatus] = useState(false)
-    const [cookies, setCookies, removeCookie] = useCookies(['token'])
-    console.log(cookies)
+    const [cookies, setCookies] = useCookies(['token'])
+
     const onButtonClick = () => {
         setCookies('token', '')
-        console.log('cookie deleted')
         props.signOut()
         setLogoutStatus(true)
     }
