@@ -2,18 +2,16 @@ import React, { useEffect } from 'react'
 import {Field, reduxForm, formValueSelector} from 'redux-form'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
+import {useCookies} from 'react-cookie'
 
 import {createStream, getCategories} from '../../actions/actions'
-import getCookie from '../../utils/getCookie'
 
 const StreamCreate = (props) => {
+    const [cookies, setCookies] = useCookies(['token'])
 
     useEffect(()=>{
         props.getCategories()
     }, [])
-
-    var token = getCookie('token')
-    console.log(!!token)
 
     const renderInput = formProps => {
         const hasError = formProps.meta.error && formProps.meta.touched ? true : false
@@ -39,13 +37,13 @@ const StreamCreate = (props) => {
     }
 
     const onSubmit = (formValues) => {
-        formValues.token = token
+        formValues.token = cookies.token
         console.log(formValues)
         props.createStream(formValues)
     }
 
     return (
-        token
+        cookies.token
         ?<form className="ui form error" onSubmit={props.handleSubmit(onSubmit)}>
             <Field name="title" label="Enter Title" component={renderInput}/>
             <div>

@@ -1,5 +1,6 @@
 import React, {useState, useEffect } from 'react'
 import { BrowserRouter, Route} from 'react-router-dom'
+import {CookiesProvider} from 'react-cookie'
 
 import Header from './Header'
 import StreamCreate from './streams/StreamCreate'
@@ -16,6 +17,7 @@ import Profile from './Profile'
 export default () => {
     return (
         <div className="ui container">
+            <CookiesProvider>
             <BrowserRouter >
                 <div>
                     <Header />
@@ -31,6 +33,7 @@ export default () => {
                     <Route path="/streams/delete" exact component={StreamDelete}/>
                 </div>
             </BrowserRouter>
+            </CookiesProvider>
         </div>
     )
 }

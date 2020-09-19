@@ -1,17 +1,21 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
+import {useCookies} from 'react-cookie'
 
 import AuthForm from './AuthForm'
-import deleteCookie from './../utils/deleteCookie'
 
 const Auth = ({authStatus}) => {
+    
+    const [cookies, setCookies] = useCookies(['token'])
 
-    if (authStatus.token) {
-        document.cookie = `token=${authStatus.token}; path=/`
-    }
+    useEffect(() => {
+        console.log(authStatus)
+        setCookies('token', authStatus.token, { path: '/' })
+    }, [authStatus.token])
+
     return (
-        authStatus.token 
+        cookies.token
         ? <Redirect to='/' />
         :<div style={{height: '100vh', display:'flex', alignItems: 'center', justifyContent: 'center',}}>
             <div className="ui middle aligned center aligned grid" style={{width: '550px'}}>

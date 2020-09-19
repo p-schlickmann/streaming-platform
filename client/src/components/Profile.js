@@ -1,16 +1,17 @@
 import React, {useEffect, useState} from 'react'
 import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
+import {useCookies} from 'react-cookie'
 
 import {signOut, signInWithToken} from './../actions/actions'
-import deleteCookie from './../utils/deleteCookie'
-import getCookie from './../utils/getCookie'
 
 const Profile = props => {
     const [gotLoggedOut, setLogoutStatus] = useState(false)
+    const [cookies, setCookies, removeCookie] = useCookies(['token'])
+    console.log(cookies)
     const onButtonClick = () => {
-        deleteCookie('token')
-        console.log('dele')
+        setCookies('token', '')
+        console.log('cookie deleted')
         props.signOut()
         setLogoutStatus(true)
     }
@@ -21,13 +22,13 @@ const Profile = props => {
                 <Redirect to="/" />
             )
         }
-        else if (!getCookie('token')) {
+        else if (!cookies.token) {
             return (
                 <Redirect to="/login" />
             )
-        } else if(!props.userInfo && getCookie('token')) {
-            console.log('saved')
-            props.signInWithToken(getCookie('token'))
+        } else if(!props.userInfo && cookies.token) {
+            console.log('got user info')
+            props.signInWithToken(cookies.token)
         } else {
             return (
                 <div style={{height: '100vh', display:'flex', alignItems: 'center', justifyContent: 'center',}}>

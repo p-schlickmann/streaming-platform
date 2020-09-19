@@ -1,17 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import {connect} from 'react-redux'
-
-import getCookie from './../utils/getCookie'
-import deleteCookie from '../utils/deleteCookie'
+import {useCookies} from 'react-cookie'
 
 const Header = ({location}) => {
-
-    const [token, setToken] = useState(null)
-    
-    useEffect(()=>{
-        setToken(getCookie('token'))
-    },)
+    const [cookies, setCookies, removeCookie] = useCookies(['token'])
 
     if (location.pathname.match('/login') || location.pathname.match('/signup') || location.pathname.match('/profile') )  return null
     return (
@@ -21,18 +14,16 @@ const Header = ({location}) => {
                 
                 <Link to="/categories" className="item"><h3>Categories</h3></Link>
                 <Link to="/" className="item"><h3>All Streams</h3></Link>
-                {token ? <Link to="/streams/new" className="item"><h3>My channel</h3></Link> : null}
-                <Link to={token ? '/profile' : '/login'} className="item">
+                {cookies.token ? <Link to="/streams/new" className="item"><h3>My channel</h3></Link> : null}
+                <Link to={cookies.token ? '/profile' : '/login'} className="item">
                     <button className="ui red google button">
                         <i className="user icon" />
-                        {token ? 'Profile' : 'Log in'}
+                        {cookies.token ? 'Profile' : 'Log in'}
                     </button>
                 </Link>
             </div>
         </div>
     )
 }
-
-
 
 export default connect()(withRouter(Header))
