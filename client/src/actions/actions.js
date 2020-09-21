@@ -65,6 +65,14 @@ export const getStreams = (category) => async dispatch => {
     })
 }
 
+export const getStream = (userName) => async dispatch => {
+    const response = await streams.get(`streams?user=${userName}`)
+    dispatch({
+        type: 'GET_STREAM',
+        payload: response.data
+    })
+}
+
 export const getCategories = () => async dispatch => {
     const response = await streams.get('categories/')
     dispatch({

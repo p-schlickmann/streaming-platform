@@ -10,8 +10,10 @@ const Auth = ({authStatus}) => {
     const [cookies, setCookies] = useCookies(['token'])
 
     useEffect(() => {
-        console.log(authStatus)
-        setCookies('token', authStatus.token, { path: '/' })
+        const nextWeek = new Date()
+        const today = new Date()
+        nextWeek.setDate(today.getDate()+7)
+        setCookies('token', authStatus.token, { path: '/', expires: nextWeek})
     }, [authStatus.token])
 
     return (

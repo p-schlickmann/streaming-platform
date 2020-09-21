@@ -26,7 +26,6 @@ const Profile = props => {
                 <Redirect to="/login" />
             )
         } else if(!props.userInfo && cookies.token) {
-            console.log('got user info')
             props.signInWithToken(cookies.token)
         } else {
             return (
@@ -38,7 +37,6 @@ const Profile = props => {
                     Your Profile
                 </div>
                 </h1>
-                
                     <div className="ui stacked segment">
                         <div>
                             <h2>{props.userInfo.username}</h2>

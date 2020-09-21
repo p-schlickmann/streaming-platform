@@ -1,7 +1,10 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
 
-const StreamShow = () => {
+const StreamShow = ({match, userStatus, stream}) => {
+
+    
+
     return (
         <div>StreamShow</div>
     )

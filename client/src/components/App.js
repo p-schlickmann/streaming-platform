@@ -7,7 +7,7 @@ import StreamCreate from './streams/StreamCreate'
 import StreamDelete from './streams/StreamDelete'
 import StreamEdit from './streams/StreamEdit'
 import StreamList from './streams/StreamList'
-import StreamShow from './streams/StreamShow'
+import WatchStream from './streams/WatchStream'
 import Categories from './streams/Categories'
 import Auth from './Auth'
 import SignUp from './SignUp'
@@ -27,7 +27,7 @@ export default () => {
                     <Route path='/profile' exact component={Profile} />
                     <Route path="/categories" exact component={Categories}/>
                     <Route path="/categories/:categoryName" component={StreamList}/>
-                    <Route path="/live/:userName" component={StreamShow} />
+                    <Route path="/live/:userName" component={WatchStream} />
                     <Route path="/streams/new" exact component={StreamCreate}/>
                     <Route path="/streams/edit" exact component={StreamEdit}/>
                     <Route path="/streams/delete" exact component={StreamDelete}/>

@@ -11,7 +11,6 @@ const StreamList = ({getStreams, streams, match}) => {
     }, [])
 
     const renderStreams = () => {
-        console.log(streams)
         if (!streams) {
             return (
             <Redirect to="/streams"/>
