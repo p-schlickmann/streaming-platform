@@ -1,6 +1,5 @@
 from rest_framework import generics, authentication, permissions
 from rest_framework.authtoken.views import ObtainAuthToken
-from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 from django.contrib.auth.models import User
@@ -29,7 +28,6 @@ class ManageUserView(generics.RetrieveUpdateDestroyAPIView):
 
     def get_object(self):
         """Retrieve ONLY authenticated user, not them all"""
-        user_stream = Stream.objects.get(user=self.request.user.id)
         return self.request.user
 
 
@@ -52,10 +50,15 @@ class StreamList(generics.ListAPIView):
         elif url_user_id:
             queryset = self.queryset.filter(user=url_user_id)
         elif user:
-            user_id = User.objects.get(username=user)
-            queryset = self.queryset.filter(user=user_id)
+            try:
+                user_id = User.objects.get(username=user)
+            except User.DoesNotExist:
+                raise ValidationError("User does not exist", 400)
+            else:
+                queryset = self.queryset.filter(user=user_id)
         else:
             queryset = self.queryset.all()
+            
 
         return queryset
 

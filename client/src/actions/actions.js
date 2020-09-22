@@ -67,6 +67,13 @@ export const getStreams = (category) => async dispatch => {
 
 export const getStream = (userName) => async dispatch => {
     const response = await streams.get(`streams?user=${userName}`)
+
+    if (response.status === 200 && !response.data[0]) {
+        dispatch({
+            type: 'GET_STREAM',
+            payload: [{error: 'This Channel is not streaming right now', errorName: userName}]
+        })
+    }
     dispatch({
         type: 'GET_STREAM',
         payload: response.data
