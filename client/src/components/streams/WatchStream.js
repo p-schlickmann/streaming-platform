@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useCookies} from 'react-cookie'
-import {Redirect} from 'react-router-dom'
+import {Redirect, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 
 import StreamShow from './StreamShow'
@@ -32,10 +32,12 @@ const WatchStream = ({userInfo, signInWithToken, getStream, stream, match}) => {
     const renderContent = () => {
         if (!cookies.token) {
             return (
-                <div>
+                <div >
                     <StreamShow />
-                    <button onClick={<Redirect to ='/login'/>}>Subscribe</button>
-                    <button onClick={<Redirect to ='/login'/>}>Follow</button>
+                    <div style={{display:'flex', alignItems:'center'}}>
+                        <Link className="ui fluid large button" to="/login">Follow</Link>
+                        <Link className="ui fluid large button primary" to="/login">Subscribe</Link>
+                    </div>
                 </div>
             )
         } else if (shouldRedirect) {
@@ -85,7 +87,6 @@ const WatchStream = ({userInfo, signInWithToken, getStream, stream, match}) => {
 }
 
 const mapStateToProps = state => {
-    console.log(state)
     return {userInfo: state.auth.userInfo, stream: state.streams[0]}
 }
 

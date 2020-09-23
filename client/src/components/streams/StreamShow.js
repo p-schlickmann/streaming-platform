@@ -1,9 +1,7 @@
 import React, {useEffect} from 'react'
 
 
-const StreamShow = ({match, userStatus, stream}) => {
-
-    
+const StreamShow = () => {
 
     return (
         <div>StreamShow</div>

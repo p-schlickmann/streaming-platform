@@ -58,7 +58,7 @@ class StreamList(generics.ListAPIView):
                 queryset = self.queryset.filter(user=user_id)
         else:
             queryset = self.queryset.all()
-            
+
 
         return queryset
 

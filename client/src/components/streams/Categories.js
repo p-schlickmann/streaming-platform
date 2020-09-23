@@ -10,9 +10,7 @@ const Categories = ({getCategories, categories}) => {
     const [categoryChosen, setCategory] = useState('')
 
     useEffect(() => {
-        if (!categories) {
             getCategories() 
-        }
     },[])
 
     const renderCategories = () => {
