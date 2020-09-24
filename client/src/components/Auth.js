@@ -14,7 +14,7 @@ const Auth = ({authStatus}) => {
         const today = new Date()
         nextWeek.setDate(today.getDate()+7)
         setCookies('token', authStatus.token, { path: '/', expires: nextWeek})
-    }, [authStatus.token])
+    }, [authStatus.token, setCookies])
 
     return (
         cookies.token

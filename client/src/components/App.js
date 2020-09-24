@@ -1,5 +1,5 @@
-import React, {useState, useEffect } from 'react'
-import { BrowserRouter, Route} from 'react-router-dom'
+import React from 'react'
+import { BrowserRouter, Route, Redirect, Switch} from 'react-router-dom'
 import {CookiesProvider} from 'react-cookie'
 
 import Header from './Header'
@@ -12,7 +12,7 @@ import Categories from './streams/Categories'
 import Auth from './Auth'
 import SignUp from './SignUp'
 import Profile from './Profile'
-
+import NotFound from './NotFound'
 
 export default () => {
     return (
@@ -20,17 +20,28 @@ export default () => {
             <CookiesProvider>
             <BrowserRouter >
                 <div>
-                    <Header />
-                    <Route path="/" exact component={StreamList}/>
-                    <Route path="/login" exact render={(props) => <Auth {...props}/>} />
-                    <Route path='/signup' exact component={SignUp}/>
-                    <Route path='/profile' exact component={Profile} />
-                    <Route path="/categories" exact component={Categories}/>
-                    <Route path="/categories/:categoryName" component={StreamList}/>
-                    <Route path="/live/:userName" component={WatchStream} />
-                    <Route path="/streams/new" exact component={StreamCreate}/>
-                    <Route path="/streams/edit" exact component={StreamEdit}/>
-                    <Route path="/streams/delete" exact component={StreamDelete}/>
+                
+                    
+                        <Header />
+                        <Switch>
+                        <Route path="/" exact component={StreamList}/>
+                        <Route path="/login" exact render={(props) => <Auth {...props}/>} />
+                        <Route path='/signup' exact component={SignUp}/>
+                        <Route path='/profile' exact component={Profile} />
+                        <Route path="/categories" exact component={Categories}/>
+                        <Route path="/categories/:categoryName" component={StreamList}/>
+                        <Route path="/live/:userName" component={WatchStream} />
+                        <Route path="/streams/new" exact component={StreamCreate}/>
+                        <Route path="/streams/edit" exact component={StreamEdit}/>
+                        <Route path="/streams/delete" exact component={StreamDelete}/>
+                        <Route path="/404" exact component={NotFound}/>
+                        <Route component={NotFound}>
+                            <Redirect to="/404"/>
+                        </Route>
+                        </Switch>
+                        
+                    
+                    
                 </div>
             </BrowserRouter>
             </CookiesProvider>

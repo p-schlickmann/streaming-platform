@@ -8,7 +8,7 @@ const StreamList = ({getStreams, streams, match}) => {
 
     useEffect(() => {
             getStreams(match.params.categoryName)
-    }, [])
+    }, [match.params.categoryName, getStreams])
 
     const renderStreams = () => {
         if (!streams) {

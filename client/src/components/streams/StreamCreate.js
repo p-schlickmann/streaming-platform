@@ -6,16 +6,16 @@ import {useCookies} from 'react-cookie'
 import {getCategories} from '../../actions/actions'
 import streams from '../../api/streams'
 
-const StreamCreate = (props) => {
+const StreamCreate = ({categories, getCategories}) => {
     const [message, setMessage] = useState('')
-    const [cookies, setCookies] = useCookies(['token'])
+    const [cookies] = useCookies(['token'])
 
     useEffect(()=>{
-        props.getCategories()
-    }, [])
+        getCategories()
+    }, [getCategories])
 
     const renderDropdown = () => {
-        return props.categories.map(cat => {
+        return categories.map(cat => {
             return (
                 <option key={cat.id} value={cat.id}>{cat.name}</option>
             )
@@ -35,7 +35,7 @@ const StreamCreate = (props) => {
             }
         })
         .then(res => {
-            if (res.status==201) {
+            if (res.status===201) {
                 setMessage('Stream Created Successfully!')
             }
         })

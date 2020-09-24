@@ -8,10 +8,11 @@ import {signInWithToken, getStream} from '../../actions/actions'
 
 const WatchStream = ({userInfo, signInWithToken, getStream, stream, match}) => {
     const [shouldRedirect, setRedirect] = useState(false)
-    const [cookies, setCookies] = useCookies(['token'])
+    const [cookies] = useCookies(['token'])
+
     useEffect(()=> {
         getStream(match.params.userName)
-    }, [])
+    }, [match.params.userName, getStream])
 
     const onEnd = () => {
 

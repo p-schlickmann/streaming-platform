@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
 import {getCategories} from '../../actions/actions'
-import streams from '../../api/streams'
 
 const Categories = ({getCategories, categories}) => {
 
@@ -11,7 +10,7 @@ const Categories = ({getCategories, categories}) => {
 
     useEffect(() => {
             getCategories() 
-    },[])
+    },[getCategories])
 
     const renderCategories = () => {
         return categories.map(category => {
