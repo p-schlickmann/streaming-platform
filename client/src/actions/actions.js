@@ -20,6 +20,9 @@ export const signInWithToken = token => async dispatch => {
 
 
 export const signIn = (formValues) => async dispatch => {
+    dispatch({
+        type: 'SIGN_OUT',
+    })
     const signInResponse = await streams.post('token/', formValues)
     if (signInResponse.data.token) {
         const userInfoResponse = await streams.get('me/', {
@@ -66,18 +69,32 @@ export const getStreams = (category) => async dispatch => {
 }
 
 export const getStream = (userName) => async dispatch => {
-    const response = await streams.get(`streams?user=${userName}`)
-
-    if (response.status === 200 && !response.data[0]) {
-        dispatch({
-            type: 'GET_STREAM',
-            payload: [{error: 'This Channel is not streaming right now', errorName: userName}]
-        })
+    try {
+        var response = await streams.get(`streams?user=${userName}`)
+    } catch(e) {
+        
+    } finally {
+        if (!response) {
+            dispatch({
+                type: 'GET_STREAM',
+                payload: [{error: 'This channel does not exist'}]
+            })
+        } else {
+            if (response.status === 200 && !response.data[0]) {
+                dispatch({
+                    type: 'GET_STREAM',
+                    payload: [{error: 'This Channel is not streaming right now', errorName: userName}]
+                })
+            } else {
+                dispatch({
+                    type: 'GET_STREAM',
+                    payload: response.data
+                })
+            }
+        }
+        
     }
-    dispatch({
-        type: 'GET_STREAM',
-        payload: response.data
-    })
+    
 }
 
 export const getCategories = () => async dispatch => {
@@ -87,3 +104,4 @@ export const getCategories = () => async dispatch => {
         payload: response.data
     })
 } 
+

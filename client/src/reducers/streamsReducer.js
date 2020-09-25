@@ -4,8 +4,6 @@ export default (state=[], action) => {
             return action.payload
         case 'GET_STREAM':
             return action.payload
-        case 'CREATE_STREAM':
-            return state    
         case 'GET_CATEGORIES':
             return action.payload
         default:
