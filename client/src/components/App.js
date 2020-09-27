@@ -12,7 +12,7 @@ import Categories from './streams/Categories'
 import Auth from './Auth'
 import SignUp from './SignUp'
 import Profile from './Profile'
-import NotFound from './NotFound'
+import _404 from './404'
 
 export default () => {
     return (
@@ -34,10 +34,7 @@ export default () => {
                         <Route path="/streams/new" exact component={StreamCreate}/>
                         <Route path="/streams/edit" exact component={StreamEdit}/>
                         <Route path="/streams/delete" exact component={StreamDelete}/>
-                        <Route path="/404" exact component={NotFound}/>
-                        <Route component={NotFound}>
-                            <Redirect to="/404"/>
-                        </Route>
+                        <Route path="*" component={_404}></Route>
                         </Switch>
                         
                     

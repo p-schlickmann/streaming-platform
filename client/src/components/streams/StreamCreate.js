@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
+import {Redirect, Link} from 'react-router-dom'
 import {useCookies} from 'react-cookie'
 
-import {getCategories} from '../../actions/actions'
+import {getCategories, signInWithToken} from '../../actions/actions'
 import streams from '../../api/streams'
 
-const StreamCreate = ({categories, getCategories}) => {
+const StreamCreate = ({categories, getCategories, signInWithToken, userInfo}) => {
     const [message, setMessage] = useState('')
     const [cookies] = useCookies(['token'])
 
     useEffect(()=>{
+        signInWithToken(cookies.token)
         getCategories()
-    }, [getCategories])
+    }, [getCategories, signInWithToken, cookies])
 
     const renderDropdown = () => {
         return categories.map(cat => {
@@ -36,7 +37,7 @@ const StreamCreate = ({categories, getCategories}) => {
         })
         .then(res => {
             if (res.status===201) {
-                setMessage('Stream Created Successfully!')
+                setMessage('Stream Created Successfully! Available at  ')
             }
         })
         .catch(err => {
@@ -65,7 +66,9 @@ const StreamCreate = ({categories, getCategories}) => {
              </div>
              <br/>
             <button className="ui button primary">Submit</button>
+            
             <p style={{display: 'inline'}}>{message}</p>
+            <Link to={`/live/${userInfo.username}`} style={{display: 'inline'}}>{message ? `http://localhost:3000/live/${userInfo.username}` : null}</Link>
         </form> 
         :<Redirect to="/login"/>
     )
@@ -74,8 +77,8 @@ const StreamCreate = ({categories, getCategories}) => {
 
 
 const mapStateToProps = state => {
-    return {categories: state.categories}
+    return {categories: state.categories, userInfo: state.auth.userInfo}
 }
 
-export default connect(mapStateToProps, {getCategories})(StreamCreate)
+export default connect(mapStateToProps, {getCategories, signInWithToken})(StreamCreate)
 

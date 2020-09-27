@@ -33,6 +33,7 @@ const WatchStream = ({userInfo, signInWithToken, getStream, stream, match, allSt
         })
     }
 
+
     const onEdit = () => {
 
     }
@@ -65,12 +66,24 @@ const WatchStream = ({userInfo, signInWithToken, getStream, stream, match, allSt
                     return <div>{stream.error}</div>
                 } else {
                     return (
-                        <div >
-                            <StreamShow />
-                            <div style={{display:'flex', alignItems:'center'}}>
-                                <Link className="ui fluid large button" to="/login">Follow</Link>
-                                <Link className="ui fluid large button primary" to="/login">Subscribe</Link>
+                        <div style={{width: '70%', }}>
+                            <br/>
+                            <StreamShow stream={stream}/>
+                            <br />
+                            <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+                                <div>
+                                    <h1>{stream.title}</h1>
+                                    <div>
+                                        <strong style={{fontSize: '15px'}}>{stream.username} </strong>
+                                            {stream.category_name ?  `is streaming ${stream.category_name}` : 'is Live'}
+                                    </div>
+                                </div>
+                                <div style={{display:'flex', alignItems:'center'}}>
+                                    <Link className="ui fluid large button" to="/login">Follow</Link>
+                                    <Link className="ui fluid large button primary" to="/login">Subscribe</Link>
+                                </div>
                             </div>
+                            
                         </div>
                     )
                 }
@@ -90,20 +103,46 @@ const WatchStream = ({userInfo, signInWithToken, getStream, stream, match, allSt
                         return <div>{stream.error}</div>
                     } else if (userInfo.id===stream.user) {
                         return (
-                            <div>
-                                <StreamShow />
-                                <button onClick={onEdit}>Edit Stream</button>
-                                <button onClick={onEnd}>End Stream</button>
+                            <div style={{width: '70%', }}>
+                                <br/>
+                                <StreamShow stream={stream}/>
+                                <br />
+                                <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+                                    <div>
+                                        <h1>{stream.title}</h1>
+                                        <div>
+                                            <strong style={{fontSize: '15px'}}>{stream.username} </strong>
+                                                {stream.category_name ?  `is streaming ${stream.category_name}` : 'is Live'}
+                                        </div>
+                                    </div>
+                                    <div style={{display:'flex', alignItems:'center', width:'37%'}}>
+                                        <button className="ui fluid large button" >Edit Stream</button>
+                                        <button className="ui fluid large button red" onClick={onEnd}>End Stream</button>
+                                    </div>
+                                </div>
+                                
                             </div>    
                         )
                     } else {
-                        console.log('pq')
                         return (
-                            
-                            <div>
-                                <StreamShow />
-                                <button onClick={onSubscribe}>Subscribe</button>
-                                <button onClick={onFollow}>Follow</button>
+                            <div style={{width: '70%', }}>
+                                <br/>
+                                <StreamShow stream={stream}/>
+                                <br />
+                                <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+                                    <div>
+                                        <h1>{stream.title}</h1>
+                                        <div>
+                                            <strong style={{fontSize: '15px'}}>{stream.username} </strong>
+                                                {stream.category_name ?  `is streaming ${stream.category_name}` : 'is Live'}
+                                        </div>
+                                    </div>
+                                    <div style={{display:'flex', alignItems:'center'}}>
+                                        <button className="ui fluid large button" >Follow</button>
+                                        <button className="ui fluid large button primary" >Subscribe</button>
+                                    </div>
+                                </div>
+                                
                             </div>  
                              
                         )

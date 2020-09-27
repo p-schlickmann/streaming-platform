@@ -10,7 +10,10 @@ const Profile = props => {
     const [cookies, setCookies] = useCookies(['token'])
 
     const onButtonClick = () => {
-        setCookies('token', '')
+        const veryLongTime = new Date()
+        const today = new Date()
+        veryLongTime.setDate(today.getDate()+999999999999999)
+        setCookies('token', '', { path: '/', expires: veryLongTime})
         props.signOut()
         setLogoutStatus(true)
     }

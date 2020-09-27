@@ -96,8 +96,9 @@ const SignUp = () => {
                             <input 
                             required 
                             type="checkbox"
+                            id="check"
                             />
-                            <label>I agree to the Terms and Conditions</label>
+                            <label to="check">I agree to the Terms and Conditions</label>
                         </div>
                     </div>
                     <br/>
