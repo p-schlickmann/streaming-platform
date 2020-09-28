@@ -1,27 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import {connect} from 'react-redux'
-import {Redirect, Link} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 import {useCookies} from 'react-cookie'
 
-import {getCategories, signInWithToken} from '../../actions/actions'
+import StreamManageForm from './StreamManageForm'
+import {signInWithToken} from '../../actions/actions'
 import streams from '../../api/streams'
 
-const StreamCreate = ({categories, getCategories, signInWithToken, userInfo}) => {
+const StreamCreate = ({signInWithToken, userInfo}) => {
     const [message, setMessage] = useState('')
     const [cookies] = useCookies(['token'])
 
     useEffect(()=>{
         signInWithToken(cookies.token)
-        getCategories()
-    }, [getCategories, signInWithToken, cookies])
 
-    const renderDropdown = () => {
-        return categories.map(cat => {
-            return (
-                <option key={cat.id} value={cat.id}>{cat.name}</option>
-            )
-        })
-    }
+    }, [signInWithToken, cookies])
 
     const onSubmit = (event) => {
         event.preventDefault()
@@ -50,35 +43,27 @@ const StreamCreate = ({categories, getCategories, signInWithToken, userInfo}) =>
         })
     }
 
+    const renderContent = () => {
+        if (!cookies.token) {
+            return <Redirect to="/login"/>
+        } 
+        if (userInfo) {
+            return <StreamManageForm userInfo={userInfo} onSubmit={onSubmit} message={message} initVal={null} />
+        }
+    } 
+
     return (
-        cookies.token
-        ?<form className="ui form" onSubmit={onSubmit}>
-            <div className="field">
-                <label>Enter Stream Title</label>
-                <input type="text" name="title"/>
-            </div>
-            <div className="field">
-                <label>Pick a category</label>
-                <select name="category">
-                    <option></option>
-                    {renderDropdown()}
-                </select>
-             </div>
-             <br/>
-            <button className="ui button primary">Submit</button>
-            
-            <p style={{display: 'inline'}}>{message}</p>
-            <Link to={`/live/${userInfo.username}`} style={{display: 'inline'}}>{message ? `http://localhost:3000/live/${userInfo.username}` : null}</Link>
-        </form> 
-        :<Redirect to="/login"/>
+        <div>
+            {renderContent()}
+        </div>
     )
 }
 
 
 
 const mapStateToProps = state => {
-    return {categories: state.categories, userInfo: state.auth.userInfo}
+    return {userInfo: state.auth.userInfo}
 }
 
-export default connect(mapStateToProps, {getCategories, signInWithToken})(StreamCreate)
+export default connect(mapStateToProps, {signInWithToken})(StreamCreate)
 

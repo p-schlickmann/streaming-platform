@@ -29,7 +29,7 @@ const Header = ({location, userInfo, signInWithToken}) => {
         )
     }
 
-    if (location.pathname.match('/login') || location.pathname.match('/signup') || location.pathname.match('/profile') || location.pathname.match('/404'))  return null
+    if (location.pathname.match('/login') || location.pathname.match('/signup') || location.pathname.match('/profile')) return null
     return (
         <div className="ui secondary pointing menu">
             <Link to="/" className="item"><h1>Streamy</h1></Link>

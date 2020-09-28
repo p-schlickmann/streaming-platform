@@ -1,10 +1,10 @@
 import React from 'react'
-import { BrowserRouter, Route, Redirect, Switch} from 'react-router-dom'
+import { BrowserRouter, Route, Switch} from 'react-router-dom'
 import {CookiesProvider} from 'react-cookie'
 
 import Header from './Header'
 import StreamCreate from './streams/StreamCreate'
-import StreamDelete from './streams/StreamDelete'
+
 import StreamEdit from './streams/StreamEdit'
 import StreamList from './streams/StreamList'
 import WatchStream from './streams/WatchStream'
@@ -31,9 +31,8 @@ export default () => {
                         <Route path="/categories" exact component={Categories}/>
                         <Route path="/categories/:categoryName" component={StreamList}/>
                         <Route path="/live/:userName" component={WatchStream} />
-                        <Route path="/streams/new" exact component={StreamCreate}/>
-                        <Route path="/streams/edit" exact component={StreamEdit}/>
-                        <Route path="/streams/delete" exact component={StreamDelete}/>
+                        <Route path="/stream/new" exact component={StreamCreate}/>
+                        <Route path="/stream/edit" exact component={StreamEdit}/>
                         <Route path="*" component={_404}></Route>
                         </Switch>
                         

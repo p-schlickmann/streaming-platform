@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 
 import streams from '../../api/streams'
 import StreamShow from './StreamShow'
+import Chat from './Chat'
 import {signInWithToken, getStream} from '../../actions/actions'
 
 const WatchStream = ({userInfo, signInWithToken, getStream, stream, match, allStreams}) => {
@@ -33,24 +34,11 @@ const WatchStream = ({userInfo, signInWithToken, getStream, stream, match, allSt
         })
     }
 
-
-    const onEdit = () => {
-
-    }
-
-    const onFollow = () => {
-
-    }
-
-    const onSubscribe = () => {
-
-    }
-
     const noStream = () => {
         return (
             <div>
                 <p>You don't have a stream yet!</p>
-                <Link to="/streams/new">Create one</Link>
+                <Link to="/stream/new">Create one</Link>
             </div> 
         )
     }
@@ -66,7 +54,8 @@ const WatchStream = ({userInfo, signInWithToken, getStream, stream, match, allSt
                     return <div>{stream.error}</div>
                 } else {
                     return (
-                        <div style={{width: '70%', }}>
+                        <div style={{display:'flex'}}>
+                            <div style={{width: '70%', }}>
                             <br/>
                             <StreamShow stream={stream}/>
                             <br />
@@ -78,13 +67,19 @@ const WatchStream = ({userInfo, signInWithToken, getStream, stream, match, allSt
                                             {stream.category_name ?  `is streaming ${stream.category_name}` : 'is Live'}
                                     </div>
                                 </div>
-                                <div style={{display:'flex', alignItems:'center'}}>
+                                <div style={{display:'flex', alignItems:'center', marginLeft: '15px'}}>
                                     <Link className="ui fluid large button" to="/login">Follow</Link>
                                     <Link className="ui fluid large button primary" to="/login">Subscribe</Link>
                                 </div>
+                                
+                                </div>
                             </div>
-                            
+                            <div style={{marginLeft:"15px", width:'30%'}}>
+                                    <br/>
+                                    <Chat userInfo={userInfo} />    
+                                </div> 
                         </div>
+                        
                     )
                 }
             }
@@ -103,7 +98,8 @@ const WatchStream = ({userInfo, signInWithToken, getStream, stream, match, allSt
                         return <div>{stream.error}</div>
                     } else if (userInfo.id===stream.user) {
                         return (
-                            <div style={{width: '70%', }}>
+                            <div style={{display: 'flex'}}>
+                                <div style={{width: '70%', }}>
                                 <br/>
                                 <StreamShow stream={stream}/>
                                 <br />
@@ -115,17 +111,24 @@ const WatchStream = ({userInfo, signInWithToken, getStream, stream, match, allSt
                                                 {stream.category_name ?  `is streaming ${stream.category_name}` : 'is Live'}
                                         </div>
                                     </div>
-                                    <div style={{display:'flex', alignItems:'center', width:'37%'}}>
-                                        <button className="ui fluid large button" >Edit Stream</button>
+                                    <div style={{display:'flex', alignItems:'center', width:'50%', marginLeft: '15px'}}>
+                                        <Link className="ui fluid large button" to="/stream/edit">Edit Stream</Link>
                                         <button className="ui fluid large button red" onClick={onEnd}>End Stream</button>
                                     </div>
                                 </div>
                                 
-                            </div>    
+                                </div> 
+                                <div style={{marginLeft:"15px", width:'30%'}}>
+                                    <br/>
+                                    <Chat userInfo={userInfo} />    
+                                </div>   
+                            </div>
+                           
                         )
                     } else {
                         return (
-                            <div style={{width: '70%', }}>
+                            <div style={{display:'flex'}}>
+                                <div style={{width: '70%', }}>
                                 <br/>
                                 <StreamShow stream={stream}/>
                                 <br />
@@ -137,13 +140,21 @@ const WatchStream = ({userInfo, signInWithToken, getStream, stream, match, allSt
                                                 {stream.category_name ?  `is streaming ${stream.category_name}` : 'is Live'}
                                         </div>
                                     </div>
-                                    <div style={{display:'flex', alignItems:'center'}}>
+                                    <div style={{display:'flex', alignItems:'center', marginLeft: '15px'}}>
                                         <button className="ui fluid large button" >Follow</button>
                                         <button className="ui fluid large button primary" >Subscribe</button>
                                     </div>
+                                    
+
                                 </div>
-                                
-                            </div>  
+                                    
+                                </div> 
+                                <div style={{marginLeft:"15px", width:'30%'}}>
+                                    <br/>
+                                    <Chat userInfo={userInfo} />    
+                                </div>  
+                            </div>
+                            
                              
                         )
                     }
