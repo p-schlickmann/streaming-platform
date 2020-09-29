@@ -58,4 +58,4 @@ In case you have any doubts, or you want to contact me for any other reason, her
 
 <a name="license"></a>
 # License
-This project is licensed under the MIT License - see the [LICENSE](license) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
