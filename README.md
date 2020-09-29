@@ -1,9 +1,10 @@
 # Streaming platform 
 ## by Pedro Schlickmann Mendes
-I made this application to pratice my fullstack skills. The back-end is made with Django and djangorestframework and the front-end with React and Redux. 
+I made this application to pratice my fullstack skills. It is a Streaming Platform that has a number of features, authentication, sign-up, filter stream by category, follow or subscribe to a streamer, live chat, profile management, password change and many others! All the Technologies used are specified [here](#tech)
 # Table of Contents
 1. [Interface](#inter)
 2. [How to run this project](#run)
+3. [Technologies used](#tech)
 3. [Report a Bug](#bug)
 4. [Contact](#contact)
 5. [License](#license)
@@ -30,6 +31,22 @@ I made this application to pratice my fullstack skills. The back-end is made wit
 5. Install [CORS Chrome Extension](https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf)
 6. And finally, run `npm start`
 
+<a name="tech"></a>
+# Technologies used
+## Back-end
+1. Python
+2. Django
+3. djangorestframework
+4. SQLite3
+## Front-end
+1. HTML
+2. Semantic UI
+3. Javascript
+4. Axios
+5. React.js
+6. Redux
+7. React Router
+8. React Cookie
 
 <a name="bug"></a>
 # Report a bug
