@@ -27,7 +27,7 @@ I made this application to pratice my fullstack skills. The back-end is made wit
 2. Create a new React app with the line `npx create-react-app client`
 3. Clone this repository on your machine and copy the [client](client) files into the new React App
 4. Install the required libraries with `npm install --save axios redux react-redux react-router-dom react-cookie redux-thunk redux-form`
-5. Install [CORS Chrome Extension]()
+5. Install [CORS Chrome Extension](#https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf)
 6. And finally, run `npm start`
 
 
@@ -37,7 +37,7 @@ If you found a bug, you can report it directly to [me](#contact), or make a pull
 
 <a name="contact"></a>
 # Contact
-In case you have any doubts, or you want to contact me for any other reason, here is my email [windowsxpedro@gmail.com]()
+In case you have any doubts, or you want to contact me for any other reason, here is my email: *windowsxpedro@gmail.com*
 
 <a name="license"></a>
 # License
