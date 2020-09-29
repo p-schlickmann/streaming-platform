@@ -36,6 +36,7 @@ const Categories = ({getCategories, categories}) => {
                 {renderCategories()}
             </div>
         </div>
+        
     )
 }
 

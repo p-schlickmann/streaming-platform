@@ -30,6 +30,7 @@ const StreamEdit = ({signInWithToken, userInfo, stream, getStream}) => {
             category: event.target.category.value,
             title: event.target.title.value
         }
+        if (!formValues.title) return
         streams.put('mystream/', formValues, {
             headers: {
                 Authorization: `Token ${cookies.token}`

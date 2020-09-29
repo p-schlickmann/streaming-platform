@@ -11,7 +11,6 @@ const Chat = ({userInfo}) => {
     const [newMessage, setMessageInput] = useState('')
 
     const renderMessages = () => {
-        console.log(messages)
         return messages.map(msg => {
             return (
                 <div key={msg.author} style={{margin:'2px 10px'}}>
@@ -34,17 +33,17 @@ const Chat = ({userInfo}) => {
     const renderMessageBox = () => {
         if (userInfo) {
             return (
-                <form className="ui form" style={{display:"flex", }}onSubmit={onSubmit}>
+                <form className="ui form" style={{display:"flex", }} onSubmit={onSubmit}>
                     <input style={{marginRight:"5px", }}  type="text" placeholder="Type your message here..." value={newMessage} onChange={e => setMessageInput(e.target.value)}/>
                     <button type="submit" className="ui blue button">Send</button>
                 </form>
             )
         } else {
             return (
-                <div>
-                    <input  type="text" placeholder="You must be logged in to send messages" tabIndex="-1" />
-                    <Link to="/login" className="ui red button">Go to Login</Link>
-                </div>
+                <form className="ui form" style={{display:"flex", }} onSubmit={onSubmit}>
+                    <input style={{marginRight:"5px", }} type="text" placeholder="You must be logged in..." disabled />
+                    <Link to="/login" className="ui red button">Login</Link>
+                </form>
             )
         }
     }

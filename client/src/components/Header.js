@@ -19,7 +19,7 @@ const Header = ({location, userInfo, signInWithToken}) => {
                 <Link to="/categories" className="item"><h3>Categories</h3></Link>
                     {userInfo ? <Link to={`/live/${userInfo.username}`} className="item"><h3>My channel</h3></Link> : null}
                 <Link to={cookies.token ? '/profile' : '/login'} className="item">
-                    <button className="ui red google button">
+                    <button className="ui large red button">
                         <i className="user icon" />
                         {cookies.token ? 'Profile' : 'Log in'}
                     </button>

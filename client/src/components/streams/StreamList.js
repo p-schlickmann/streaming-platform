@@ -5,7 +5,6 @@ import { Redirect, Link } from 'react-router-dom'
 import {getStreams} from '../../actions/actions'
 
 const StreamList = ({getStreams, streams, match}) => {
-
     useEffect(() => {
             getStreams(match.params.categoryName)
     }, [match.params.categoryName, getStreams])
@@ -35,11 +34,15 @@ const StreamList = ({getStreams, streams, match}) => {
         })
     }
 
+    const noStreams = () => {
+        if (match.params.categoryName) return <h2>No streams were found :(</h2>
+    }
+
     return (
         <div>
             <h3>Live</h3>
             <div className="ui celled list">
-            {renderStreams()}
+                {streams[0] ? renderStreams() : noStreams()}
             </div>
             
         </div>

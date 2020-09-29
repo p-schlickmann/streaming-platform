@@ -12,6 +12,8 @@ import Categories from './streams/Categories'
 import Auth from './Auth'
 import SignUp from './SignUp'
 import Profile from './Profile'
+import ProfileEdit from './ProfileEdit'
+import PasswordReset from './PasswordReset'
 import _404 from './404'
 
 export default () => {
@@ -28,6 +30,8 @@ export default () => {
                         <Route path="/login" exact render={(props) => <Auth {...props}/>} />
                         <Route path='/signup' exact component={SignUp}/>
                         <Route path='/profile' exact component={Profile} />
+                        <Route path='/profile/edit' exact component={ProfileEdit} />
+                        <Route path='/profile/changepassword' exact component={PasswordReset} />
                         <Route path="/categories" exact component={Categories}/>
                         <Route path="/categories/:categoryName" component={StreamList}/>
                         <Route path="/live/:userName" component={WatchStream} />

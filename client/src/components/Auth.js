@@ -5,17 +5,18 @@ import {useCookies} from 'react-cookie'
 
 import AuthForm from './AuthForm'
 
-const Auth = ({authStatus}) => {
-    
+const Auth = ({authStatus, signOut}) => {
     const [cookies, setCookies] = useCookies(['token'])
 
     useEffect(() => {
+        if (authStatus.error) {
+            return
+        }
         const nextWeek = new Date()
         const today = new Date()
         nextWeek.setDate(today.getDate()+14)
-        console.log(nextWeek)
         setCookies('token', authStatus.token, { path: '/', expires: nextWeek})
-    }, [authStatus.token, setCookies])
+    }, [authStatus.token, setCookies, authStatus.error])
 
     return (
         cookies.token
@@ -32,7 +33,9 @@ const Auth = ({authStatus}) => {
                     <div className="ui stacked segment">
                         <AuthForm/>
                     </div>
-                
+                    <div>
+                        {authStatus.error}
+                    </div>
 
                 <div className="ui message"> New to us? <Link to='/signup'>Sign up</Link>
                 </div>
@@ -43,6 +46,7 @@ const Auth = ({authStatus}) => {
 }
 
 const mapStateToProps = state => {
+    console.log(state)
     return {authStatus: state.auth}
 }
 
