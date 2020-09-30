@@ -12,6 +12,8 @@ I made this application to pratice my fullstack skills. It is a Streaming Platfo
 <a name="inter"></a>
 # Interface
 ### I made a youtube video showing the app interface. You can watch it here: https://youtu.be/VVLdeg-23YM  
+<img height="500" src="https://github.com/p-schlickmann/streaming-platform/blob/master/client/he.png" >  
+
 ### Otherwise, you can also [run your own project](#run)
 
 <a name="run"></a>
